@@ -9,7 +9,7 @@ services:
       - FLASK_ENV=development
 
   frontend:
-    image: trangh/nipah-ebs-monitor-fullstack-frontend:v1.0.0
+    image: trangh/nipah-ebs-monitor-fullstack-frontend:v1.0.1
     ports:
       - "3000:80"
     depends_on:
