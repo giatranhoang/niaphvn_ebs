@@ -6,13 +6,16 @@ function App() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  // API endpoint - use localhost:5002 for external access, backend:5000 for Docker internal
+  const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5002';
+
   useEffect(() => {
     fetchItems();
   }, []);
 
   const fetchItems = async () => {
     try {
-      const response = await axios.get('http://localhost:5002/api/items');
+      const response = await axios.get(`${API_URL}/api/items`);
       setItems(response.data);
     } catch (error) {
       console.error('Error fetching items:', error);
@@ -22,7 +25,7 @@ function App() {
   const handleFetch = async () => {
     setLoading(true);
     try {
-      await axios.post('http://localhost:5002/api/fetch');
+      await axios.post(`${API_URL}/api/fetch`);
       fetchItems(); // Refresh items after fetch
     } catch (error) {
       console.error('Error fetching data:', error);

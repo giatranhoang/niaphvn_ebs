@@ -2,14 +2,14 @@ version: '3.8'
 
 services:
   backend:
-    build: ./backend
+    image: trangh/nipah-ebs-monitor-fullstack-backend:v1.0.0
     ports:
       - "5002:5000"
     environment:
       - FLASK_ENV=development
 
   frontend:
-    build: ./frontend
+    image: trangh/nipah-ebs-monitor-fullstack-frontend:v1.0.0
     ports:
       - "3000:80"
     depends_on:
