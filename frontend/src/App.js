@@ -38,32 +38,34 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>🦠 Nipah Virus – Vietnam EBS Monitoring Dashboard</h1>
-        <p>Event-Based Surveillance from Vietnam news & Social media</p>
-        <button onClick={handleFetch} disabled={loading}>
+        <p>Event-Based Surveillance from Vietnam News & Social media</p>
+        <button className="btn btn-primary" onClick={handleFetch} disabled={loading}>
           {loading ? 'Fetching...' : 'Fetch Latest Data'}
         </button>
       </header>
       <main>
-        <table>
-          <thead>
-            <tr>
-              <th>Source</th>
-              <th>Title</th>
-              <th>Summary</th>
-              <th>Published</th>
-            </tr>
-          </thead>
-          <tbody>
-            {items.map((item, index) => (
-              <tr key={index}>
-                <td>{item.source}</td>
-                <td><a href={item.url} target="_blank" rel="noopener noreferrer">{item.title}</a></td>
-                <td>{item.text}</td>
-                <td>{item.published ? new Date(item.published).toLocaleDateString() : 'N/A'}</td>
+        <div class="table-responsive">
+          <table class="table table-striped table-hover align-middle">
+            <thead class="table-light">
+              <tr>
+                <th class="w-10">Source</th>
+                <th class="w-30">Title</th>
+                <th class="w-55">Summary</th>
+                <th class="w-5">Published</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {items.map((item, index) => (
+                <tr key={index}>
+                  <td>{item.source}</td>
+                  <td><a href={item.url} target="_blank" rel="noopener noreferrer">{item.title}</a></td>
+                  <td>{item.text}</td>
+                  <td>{item.published ? new Date(item.published).toLocaleDateString() : 'N/A'}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </main>
     </div>
   );

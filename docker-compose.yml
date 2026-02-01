@@ -11,10 +11,11 @@ services:
       - FLASK_ENV=development
 
   frontend:
-    image: trangh/nipah-ebs-monitor-fullstack-frontend:v1.0.1
+    # image: trangh/nipah-ebs-monitor-fullstack-frontend:v1.0.1
     build: ./frontend
+    # image: nginx:alpine
     volumes:
-      - ./frontend:/app
+      - ./frontend/build:/usr/share/nginx/html
     ports:
       - "3000:80"
     depends_on:
