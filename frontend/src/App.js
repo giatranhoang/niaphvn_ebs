@@ -7,7 +7,7 @@ function App() {
   const [loading, setLoading] = useState(false);
 
   // API endpoint - use localhost:5002 for external access, backend:5000 for Docker internal
-  const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5002';
+//   const API_URL = '/api';
 
   useEffect(() => {
     fetchItems();
@@ -15,7 +15,7 @@ function App() {
 
   const fetchItems = async () => {
     try {
-      const response = await axios.get(`${API_URL}/api/items`);
+      const response = await axios.get('/api/items');
       setItems(response.data);
     } catch (error) {
       console.error('Error fetching items:', error);
@@ -25,7 +25,7 @@ function App() {
   const handleFetch = async () => {
     setLoading(true);
     try {
-      await axios.post(`${API_URL}/api/fetch`);
+      await axios.post('/api/fetch');
       fetchItems(); // Refresh items after fetch
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -38,7 +38,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>🦠 Nipah Virus – Vietnam EBS Monitoring Dashboard</h1>
-        <p>Early-Based Surveillance from Vietnam news & social media</p>
+        <p>Event-Based Surveillance from Vietnam news & Social media</p>
         <button onClick={handleFetch} disabled={loading}>
           {loading ? 'Fetching...' : 'Fetch Latest Data'}
         </button>
@@ -49,17 +49,17 @@ function App() {
             <tr>
               <th>Source</th>
               <th>Title</th>
+              <th>Summary</th>
               <th>Published</th>
-              <th>URL</th>
             </tr>
           </thead>
           <tbody>
             {items.map((item, index) => (
               <tr key={index}>
                 <td>{item.source}</td>
-                <td>{item.title}</td>
+                <td><a href={item.url} target="_blank" rel="noopener noreferrer">{item.title}</a></td>
+                <td>{item.text}</td>
                 <td>{item.published ? new Date(item.published).toLocaleDateString() : 'N/A'}</td>
-                <td><a href={item.url} target="_blank" rel="noopener noreferrer">Link</a></td>
               </tr>
             ))}
           </tbody>

@@ -9,15 +9,18 @@ RUN npm install
 
 COPY . .
 
-# Allow setting the frontend API base URL at build time. Default to localhost for local dev.
-ARG REACT_APP_API_URL=http://localhost:5002
-ENV REACT_APP_API_URL=${REACT_APP_API_URL}
-
 RUN npm run build
 
 # Production stage
 FROM nginx:alpine
 
+# Remove default nginx config
+RUN rm /etc/nginx/conf.d/default.conf
+
+# Copy custom nginx config
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Copy React build
 COPY --from=build /app/build /usr/share/nginx/html
 
 EXPOSE 80

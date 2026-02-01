@@ -1,6 +1,13 @@
 import feedparser
 from dateutil import parser as date_parser
 import re
+import html
+
+def normalize_text(text: str) -> str:
+    if not text:
+        return ""
+    text = re.sub(r'<[^>]+>', '', text)
+    return html.unescape(text).strip()
 
 def fetch_rss(rss_url, source_name):
     feed = feedparser.parse(rss_url)
@@ -13,8 +20,8 @@ def fetch_rss(rss_url, source_name):
         items.append({
             "source": source_name,
             "platform": "News",
-            "title": entry.get("title", ""),
-            "text": text,
+            "title": normalize_text(entry.get("title", "")),
+            "text": normalize_text(text),
             "published": parse_date(entry),
             "url": entry.get("link", "")
         })

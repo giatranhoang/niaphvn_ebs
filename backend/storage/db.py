@@ -32,7 +32,7 @@ def insert_items(items):
 def get_all_items():
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
-    cursor.execute('SELECT source, platform, title, text, published, url FROM rss_items')
+    cursor.execute('SELECT source, platform, title, text, published, url FROM rss_items WHERE published IS NOT NULL ORDER BY published DESC')
     rows = cursor.fetchall()
     conn.close()
     items = []

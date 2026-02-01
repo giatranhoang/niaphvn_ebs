@@ -2,7 +2,9 @@ version: '3.8'
 
 services:
   backend:
-    image: trangh/nipah-ebs-monitor-fullstack-backend:v1.0.0
+    image: trangh/nipah-ebs-monitor-fullstack-backend:v1.0.1
+    volumes:
+      - ./backend:/app
     ports:
       - "5002:5000"
     environment:
@@ -10,6 +12,9 @@ services:
 
   frontend:
     image: trangh/nipah-ebs-monitor-fullstack-frontend:v1.0.1
+    build: ./frontend
+    volumes:
+      - ./frontend:/app
     ports:
       - "3000:80"
     depends_on:

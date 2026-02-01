@@ -28,17 +28,21 @@ RSS_SOURCES = [
         'url': "https://thanhnien.vn/rss/suc-khoe.rss"
     },
     {
-        "name": "Nhan dan",
-        'url': "https://nhandan.vn/rss/suc-khoe.rss"
-    },
-    {
         "name": "SGGP",
-        'url': "https://sggp.org.vn/rss/suc-khoe.rss"
+        'url': "https://www.sggp.org.vn/rss/ytesuckhoe-212.rss"
     },
     {
         "name": "Vietnamnet",
         'url': "https://vietnamnet.vn/rss/suc-khoe.rss"
     },
+    {
+        "name": "VOA Tieng Viet - Suc Khoe",
+        "url": "https://www.voatiengviet.com/api/z-tyml-vomx-tperiu_"
+    },
+    {
+        "name": "Dan Tri - Suc khoe",
+        "url": "https://dantri.com.vn/rss/suc-khoe.rss"
+    }
 ]
 
 @app.route('/api/items', methods=['GET'])
